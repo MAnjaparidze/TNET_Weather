@@ -8,7 +8,7 @@ interface IHttpService {
 }
 
 const instance: AxiosInstance = axios.create({
-  baseURL: 'https://your-api-url.com/',
+  baseURL: 'https://api.openweathermap.org/',
 });
 
 const httpService: IHttpService = {
