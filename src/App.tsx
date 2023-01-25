@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from './components/searchBar/SearchBar';
 import Sidebar from './components/sidebar/Sidebar';
+import { IWeatherData } from './interfaces/weather.interface';
 
 function App() {
+  const [chosenLocation, setChosenLocation] = useState<IWeatherData | null>(null);
+
   return (
     <div className='flex flex-col gap-10 md:flex-row w-screen h-screen p-2 overflow-auto bg-main-dark'>
 
