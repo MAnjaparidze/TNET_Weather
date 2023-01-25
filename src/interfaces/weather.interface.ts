@@ -9,7 +9,10 @@ interface IWeatherData {
     temp: number;
     feels_like: number;
     humidity: number;
-    sea_level: number
+    sea_level: number;
+    grnd_level: number;
+    temp_min: number;
+    temp_max: number;
   };
   visibility: number;
   wind: {
@@ -32,6 +35,8 @@ interface IForecastItem {
   dt: number;
   main: {
     temp: number;
+    temp_min: number;
+    temp_max: number;
   };
   weather: {
     id: number;

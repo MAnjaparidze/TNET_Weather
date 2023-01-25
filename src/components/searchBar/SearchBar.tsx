@@ -21,33 +21,37 @@ function SearchBar({ setChosenLocation, setForecastData }: ISearchBarProps) {
     setInputValue(value);
   };
 
-  const handleSubmit = async (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      toggleIsLoading(true);
-      let cityResponse = await weatherService.getDataByQ(inputValue).then(res => res);
-      // Checking if User Typed City Name is Incorrect
-      if (cityResponse.status === 200 && cityResponse.data.length === 0) {
+  const handleSubmit = async () => {
+    toggleIsLoading(true);
+    let cityResponse = await weatherService.getDataByQ(inputValue).then(res => res);
+    // Checking if User Typed City Name is Incorrect
+    if (cityResponse.status === 200 && cityResponse.data.length === 0) {
+      toggleIsSubmitted(true);
+      toggleIsError(true);
+    } else {
+      // If the city was found then we are requesting city's weather data
+      let weatherResponse = await weatherService.getWeatherByLocation(cityResponse.data[0].lat, cityResponse.data[0].lon)
+      let forecastResponse = await weatherService.getForecastByLocation(cityResponse.data[0].lat, cityResponse.data[0].lon);
+
+      // Checking if both api requests were completed successfully
+      if (weatherResponse.status === 200 && forecastResponse.status === 200) {
+        setChosenLocation(weatherResponse.data);
+        setForecastData(forecastResponse.data.list);
+        toggleIsSubmitted(true);
+      } else {
         toggleIsSubmitted(true);
         toggleIsError(true);
-      } else {
-        // If the city was found then we are requesting city's weather data
-        let weatherResponse = await weatherService.getWeatherByLocation(cityResponse.data[0].lat, cityResponse.data[0].lon)
-        let forecastResponse = await weatherService.getForecastByLocation(cityResponse.data[0].lat, cityResponse.data[0].lon);
-
-        // Checking if both api requests were completed successfully
-        if (weatherResponse.status === 200 && forecastResponse.status === 200) {
-          setChosenLocation(weatherResponse.data);
-          setForecastData(forecastResponse.data.list);
-          toggleIsSubmitted(true);
-        } else {
-          toggleIsSubmitted(true);
-          toggleIsError(true);
-        }
       }
-
-      toggleIsLoading(false);
     }
+
+    toggleIsLoading(false);
   };
+
+  const handleOnEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSubmit();
+    }
+  }
 
   const handleResetState = () => {
     toggleIsSubmitted(false);
@@ -59,15 +63,16 @@ function SearchBar({ setChosenLocation, setForecastData }: ISearchBarProps) {
       <input
         className={`bg-transparent outline-none flex-grow ${isSubmitted ? isError ? 'text-red-900' : 'text-green-900' : 'text-white'}`}
         onChange={handleChange} placeholder='Search for Cities'
-        onKeyDown={handleSubmit}
+        onKeyDown={handleOnEnter}
         onFocus={handleResetState}
         disabled={isLoading}
         type="text"
         value={inputValue}
       />
-      {(inputValue && !isSubmitted) && <div className='w-4'>
-        <img src={EnterLogo} alt="" />
-      </div>}
+      {(inputValue && !isSubmitted) &&
+        <div className='w-4 cursor-pointer' onClick={handleSubmit}>
+          <img src={EnterLogo} alt="" />
+        </div>}
     </div>
   )
 }

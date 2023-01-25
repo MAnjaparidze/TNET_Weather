@@ -4,6 +4,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import { IForecastItem, IWeatherData } from './interfaces/weather.interface';
 
 function App() {
+  const [chosenCity, setChosenCity] = useState<string>("");
   const [chosenLocation, setChosenLocation] = useState<IWeatherData | null>(null);
   const [forecastData, setForecastData] = useState<IForecastItem[]>([]);
 
