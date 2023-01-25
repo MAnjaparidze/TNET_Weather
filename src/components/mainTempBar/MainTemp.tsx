@@ -1,13 +1,13 @@
 import React from 'react'
 import { IWeatherData } from '../../interfaces/weather.interface'
 
-import Sun from '../../assets/Sunny.png';
-import Storm from '../../assets/Storm.png';
-import Sunny_Clouds from '../../assets/Sunny_Clouds.png';
-import Sunny_Rain from '../../assets/Sunny_Rain.png';
-import Clouds from '../../assets/Clouds.png';
-import Mist from '../../assets/Mist.png';
-import Snow from '../../assets/Snow.png';
+import Sun from '../../assets/weatherTypes/Sunny.png';
+import Storm from '../../assets/weatherTypes/Storm.png';
+import Sunny_Clouds from '../../assets/weatherTypes/Sunny_Clouds.png';
+import Sunny_Rain from '../../assets/weatherTypes/Sunny_Rain.png';
+import Clouds from '../../assets/weatherTypes/Clouds.png';
+import Mist from '../../assets/weatherTypes/Mist.png';
+import Snow from '../../assets/weatherTypes/Snow.png';
 
 
 type IMainTempProps = {

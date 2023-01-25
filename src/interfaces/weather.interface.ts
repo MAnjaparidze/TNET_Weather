@@ -16,6 +16,7 @@ interface IWeatherData {
     temp_max: number;
   };
   visibility: number;
+  dt: number;
   wind: {
     speed: number;
   };

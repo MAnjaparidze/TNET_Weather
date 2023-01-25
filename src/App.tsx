@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ExtraInfo from './components/extraInfoBar/ExtraInfo';
 
 import MainTemp from './components/mainTempBar/MainTemp';
 import SearchBar from './components/searchBar/SearchBar';
@@ -26,7 +27,9 @@ function App() {
             <MainTemp chosenCity={chosenCity} chosenLocation={chosenLocation} />
           </div>
           <div className='p-4 md:col-span-2 md:row-span-1 md:col-start-1 bg-main-gray rounded-lg'>Hourly Forecast</div>
-          <div className='p-4 md:col-span-2 md:row-span-1 bg-main-gray rounded-lg'>Extra Information</div>
+          <div className='p-4 md:col-span-2 md:row-span-1 bg-main-gray rounded-lg'>
+            <ExtraInfo chosenLocation={chosenLocation} />
+          </div>
           <div className='p-4 md:col-span-1 md:col-start-3 md:row-span-4 md:row-start-1 bg-main-gray rounded-lg'>5 Day Forecast</div>
         </div>
       </div>
