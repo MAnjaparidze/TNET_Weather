@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import { IForecastItem, IWeatherData } from '../../interfaces/weather.interface';
 import weatherService from '../../services/weather.service';
 
@@ -7,9 +7,11 @@ import EnterLogo from '../../assets/Enter_Logo.png';
 type ISearchBarProps = {
   setChosenLocation: React.Dispatch<React.SetStateAction<IWeatherData | null>>;
   setForecastData: React.Dispatch<React.SetStateAction<IForecastItem[]>>;
+  setChosenCity: React.Dispatch<React.SetStateAction<string>>;
+  chosenCity: string;
 }
 
-function SearchBar({ setChosenLocation, setForecastData }: ISearchBarProps) {
+function SearchBar({ setChosenLocation, setForecastData, setChosenCity }: ISearchBarProps) {
   const [inputValue, setInputValue] = useState<string>('');
   const [isSubmitted, toggleIsSubmitted] = useState<boolean>(false);
   const [isLoading, toggleIsLoading] = useState<boolean>(false);
@@ -37,6 +39,7 @@ function SearchBar({ setChosenLocation, setForecastData }: ISearchBarProps) {
       if (weatherResponse.status === 200 && forecastResponse.status === 200) {
         setChosenLocation(weatherResponse.data);
         setForecastData(forecastResponse.data.list);
+        setChosenCity(inputValue);
         toggleIsSubmitted(true);
       } else {
         toggleIsSubmitted(true);
@@ -61,7 +64,7 @@ function SearchBar({ setChosenLocation, setForecastData }: ISearchBarProps) {
   return (
     <div className='flex flex-row justify-between items-center'>
       <input
-        className={`bg-transparent outline-none flex-grow ${isSubmitted ? isError ? 'text-red-900' : 'text-green-900' : 'text-white'}`}
+        className={`bg-transparent outline-none flex-grow font-bold ${isSubmitted ? isError ? 'text-red-700' : 'text-green-700' : 'text-white'}`}
         onChange={handleChange} placeholder='Search for Cities'
         onKeyDown={handleOnEnter}
         onFocus={handleResetState}

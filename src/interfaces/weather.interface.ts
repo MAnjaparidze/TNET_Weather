@@ -3,6 +3,7 @@ interface IWeatherData {
     {
       id: number;
       main: string;
+      description: string;
     }
   ];
   main: {

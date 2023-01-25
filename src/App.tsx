@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+
+import MainTemp from './components/mainTempBar/MainTemp';
 import SearchBar from './components/searchBar/SearchBar';
 import Sidebar from './components/sidebar/Sidebar';
+
 import { IForecastItem, IWeatherData } from './interfaces/weather.interface';
 
 function App() {
@@ -17,12 +20,14 @@ function App() {
 
         <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
           <div className='p-2 md:col-span-2 md:row-span-1 bg-main-gray rounded-lg'>
-            <SearchBar setChosenLocation={setChosenLocation} setForecastData={setForecastData} />
+            <SearchBar setChosenLocation={setChosenLocation} setForecastData={setForecastData} chosenCity={chosenCity} setChosenCity={setChosenCity} />
           </div>
-          <div className='p-4 bg-gray-200 md:col-span-2 md:row-span-1'>Main Temperature</div>
-          <div className='p-4 bg-gray-200 md:col-span-2 md:row-span-1 md:col-start-1'>Hourly Forecast</div>
-          <div className='p-4 bg-gray-200 md:col-span-2 md:row-span-1'>Extra Information</div>
-          <div className='p-4 bg-gray-200 md:col-span-1 md:col-start-3 md:row-span-4 md:row-start-1'>5 Day Forecast</div>
+          <div className='p-4 md:col-span-2 md:row-span-1 rounded-lg'>
+            <MainTemp chosenCity={chosenCity} chosenLocation={chosenLocation} />
+          </div>
+          <div className='p-4 md:col-span-2 md:row-span-1 md:col-start-1 bg-main-gray rounded-lg'>Hourly Forecast</div>
+          <div className='p-4 md:col-span-2 md:row-span-1 bg-main-gray rounded-lg'>Extra Information</div>
+          <div className='p-4 md:col-span-1 md:col-start-3 md:row-span-4 md:row-start-1 bg-main-gray rounded-lg'>5 Day Forecast</div>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ interface IWeatherService {
 }
 
 const appid = process.env.REACT_APP_APPID;
-const unitsParam = "metric";
+const units = "metric";
 
 const weatherService: IWeatherService = {
   async getWeatherByLocation(lat: number, lon: number) {
@@ -18,7 +18,7 @@ const weatherService: IWeatherService = {
       lat,
       lon,
       appid,
-      unitsParam
+      units
     };
     return httpService.get('/data/2.5/weather', { params });
   },
@@ -27,7 +27,7 @@ const weatherService: IWeatherService = {
       q,
       limit: 1,
       appid,
-      unitsParam
+      units
     };
     return httpService.get('/geo/1.0/direct', { params });
   },
@@ -36,7 +36,7 @@ const weatherService: IWeatherService = {
       lat,
       lon,
       appid,
-      unitsParam
+      units
     };
     return httpService.get('/data/2.5/forecast', { params });
   },
