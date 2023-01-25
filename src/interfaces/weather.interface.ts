@@ -25,20 +25,23 @@ interface IQData {
 }
 
 interface IForecastData {
-  list: [{
-    dt: number;
-    main: {
-      temp: number;
-    };
-    weather: {
-      id: number;
-      main: string;
-    }
-  }]
+  list: IForecastItem[]
+}
+
+interface IForecastItem {
+  dt: number;
+  main: {
+    temp: number;
+  };
+  weather: {
+    id: number;
+    main: string;
+  }
 }
 
 export type {
   IWeatherData,
   IQData,
-  IForecastData
+  IForecastData,
+  IForecastItem
 }
