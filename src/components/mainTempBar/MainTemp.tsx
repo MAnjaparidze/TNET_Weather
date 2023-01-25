@@ -2,6 +2,7 @@ import React from 'react'
 import { IWeatherData } from '../../interfaces/weather.interface'
 
 import Sun from '../../assets/weatherTypes/Sunny.png';
+import Moon from '../../assets/weatherTypes/Moon.png'
 import Storm from '../../assets/weatherTypes/Storm.png';
 import Sunny_Clouds from '../../assets/weatherTypes/Sunny_Clouds.png';
 import Sunny_Rain from '../../assets/weatherTypes/Sunny_Rain.png';
@@ -27,6 +28,7 @@ interface IWeatherKeyProps {
 
 const weatherKeyPairs: IWeatherKeyProps = {
   Mist: Mist,
+  Moon: Moon,
   Clear: Sun,
   Clouds: Clouds,
   Snow: Snow,
@@ -44,7 +46,7 @@ export default function MainTemp({ chosenLocation, chosenCity }: IMainTempProps)
         <span className='mt-auto mb-2 text-[3rem] font-bold'>Temp: {chosenLocation?.main.temp} C</span>
       </div>
       <div>
-        {<img src={weatherKeyPairs[chosenLocation ? chosenLocation.weather[0].main : Sunny_Clouds]} alt="" />}
+        {<img src={weatherKeyPairs[chosenLocation ? (chosenLocation.sys.type === 1 && chosenLocation.weather[0].main === 'Clear') ? 'Moon' : chosenLocation.weather[0].main : Sunny_Clouds]} alt="" />}
       </div>
     </div>
   )

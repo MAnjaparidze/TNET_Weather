@@ -20,6 +20,10 @@ interface IWeatherData {
   wind: {
     speed: number;
   };
+  name: string,
+  sys: {
+    type: number
+  }
 }
 
 interface IQData {
