@@ -5,11 +5,11 @@ import { IWeatherData, IQData, IForecastData } from '../interfaces/weather.inter
 
 interface IWeatherService {
   getWeatherByLocation(lat: number, lon: number): Promise<AxiosResponse<IWeatherData>>;
-  getDataByQ(q: string, limit: number): Promise<AxiosResponse<IQData>>;
+  getDataByQ(q: string): Promise<AxiosResponse<IQData[]>>;
   getForecastByLocation(lat: number, lon: number): Promise<AxiosResponse<IForecastData>>;
 }
 
-const appid = process.env.APPID;
+const appid = process.env.REACT_APP_APPID;
 const unitsParam = "metric";
 
 const weatherService: IWeatherService = {
@@ -22,10 +22,10 @@ const weatherService: IWeatherService = {
     };
     return httpService.get('/data/2.5/weather', { params });
   },
-  async getDataByQ(q: string, limit: number) {
+  async getDataByQ(q: string) {
     const params = {
       q,
-      limit,
+      limit: 1,
       appid,
       unitsParam
     };

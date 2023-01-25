@@ -18,12 +18,10 @@ interface IWeatherData {
 }
 
 interface IQData {
-  results: [{
-    name: string;
-    lat: number;
-    long: number;
-    country: string;
-  }]
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
 }
 
 interface IForecastData {
